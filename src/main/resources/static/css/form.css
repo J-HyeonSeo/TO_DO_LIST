@@ -1,0 +1,24 @@
+header {
+  justify-content: center;
+}
+
+main {
+  width: 900px;
+  margin: 100px auto;
+
+}
+
+input {
+  width: 900px;
+  height: 75px;
+  background-color: #DADADA;
+  font-size: 30px;
+  border-radius: 15px;
+  color: black;
+  padding-left: 20px;
+  border: none;
+}
+
+#new-btn {
+  margin: 100px auto;
+}

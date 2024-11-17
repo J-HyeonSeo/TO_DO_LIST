@@ -1,0 +1,200 @@
+
+/**
+    Dancing Script Font
+ */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+/**
+    Noto Sans KR Font
+ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+/**
+    Initial Styles Setting..
+ */
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+  background-color: #6D2054;
+}
+
+/**
+    Project Styles Settings..
+ */
+header {
+  width: 900px;
+  height: 180px;
+  margin: 100px auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 50px;
+}
+
+#new-btn {
+  width: 150px;
+  height: 70px;
+  background-color: #E7D2AD;
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 50px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#new-btn:hover {
+  cursor: pointer;
+  background-color: #bea16a;
+  box-shadow: 4px 4px 4px rgba(255, 255, 255, 0.4);
+}
+
+#new-btn div {
+  width: 140px;
+  height: 60px;
+  background-color: #D4C19F;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h5 {
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 50px;
+  padding-bottom: 10px;
+}
+
+#filter-section {
+  width: 900px;
+  margin: 10px auto;
+}
+
+.filter {
+  font-size: 17px;
+  margin-right: 15px;
+}
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type='radio']:checked {
+   background-color: #595959;
+   border: 2px solid #fff;
+}
+
+#main-section {
+  width: 900px;
+  height: 600px;
+  margin: 30px auto;
+}
+
+.card {
+  color: #494949;
+  width: 900px;
+  height: 70px;
+  margin: 18px 0;
+  background-color: #E7D2AD;
+  border-radius: 15px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.card:nth-child(2), .card:nth-child(6) {
+  background-color: #DADADA;
+}
+
+.card:nth-child(4) {
+  background-color: #E6FFDD;
+}
+
+.card:nth-child(3), .card:nth-child(7) {
+  background-color: #FFB3B3;
+}
+
+.interaction {
+  display: flex;
+}
+
+input[type='checkbox'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+input[type='checkbox']:checked {
+  background-color: #595959;
+  border: 5px solid #fff;
+}
+
+input[type='checkbox']:hover {
+  background-color: #a6a6a6;
+  border: 5px solid #fff;
+}
+
+.delete-btn {
+  width: 30px;
+  height: 30px;
+  color: darkred;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn:hover {
+  color: #fff;
+  cursor: pointer;
+  background-color: #ff6969;
+}
+
+#page-section {
+  width: 600px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.page {
+  background-color: #F0FFB9;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 25px;
+}
+
+.page:hover {
+  background-color: #a5b27f;
+  cursor: pointer;
+}
