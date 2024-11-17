@@ -9,81 +9,87 @@
   <header>
     <h1>TO DO LIST</h1>
     <div id="new-btn">
-      <div>
-        <h5>+ new</h5>
-      </div>
+      <a href="/page/form.do">
+        <div>
+          <h5>+ new</h5>
+        </div>
+      </a>
     </div>
   </header>
   <main>
     <section id="filter-section">
       <label class="filter">
-        <input type="radio" id="all" name="filter" checked>
+        <input type="radio" id="all" name="filter" onchange="changeFilter('ALL')" th:checked="${filter.filter.name() == 'ALL' || filter.filter == null}">
         전체
       </label>
       <label class="filter">
-        <input type="radio" id="no-checked" name="filter">
-        완료하지 못한 목록만
+        <input type="radio" id="no-checked" name="filter" onchange="changeFilter('CHECKED')" th:checked="${filter.filter.name() == 'CHECKED'}">
+        완료한 목록만
       </label>
       <label class="filter">
-        <input type="radio" id="checked" name="filter">
-        완료한 목록만
+        <input type="radio" id="checked" name="filter" onchange="changeFilter('NO_CHECKED')" th:checked="${filter.filter.name() == 'NO_CHECKED'}">
+        완료하지 못한 목록만
       </label>
     </section>
     <section id="main-section">
-      <div class="card">JPA Dirty Checking에 대한 공부
-          <div class="interaction">
-            <input type="checkbox">
-            <div class="delete-btn">X</div>
-          </div>
-      </div>
-      <div class="card">JPA Dirty Checking에 대한 공부
+
+      <div class="card" th:each="todo : ${todoList.getContent()}"
+        th:data-todoId="${todo.id}">
+        <div th:text="${todo.content}"></div>
         <div class="interaction">
-          <input type="checkbox">
-          <div class="delete-btn">X</div>
+          <input type="checkbox" th:checked="${todo.checked}" onchange="updateTodoChecked(this)">
+          <div class="delete-btn" onclick="deleteTodo(this)">X</div>
         </div>
       </div>
-      <div class="card">JPA Dirty Checking에 대한 공부
-        <div class="interaction">
-          <input type="checkbox">
-          <div class="delete-btn">X</div>
-        </div>
-      </div>
-      <div class="card">JPA Dirty Checking에 대한 공부
-        <div class="interaction">
-          <input type="checkbox">
-          <div class="delete-btn">X</div>
-        </div>
-      </div>
-      <div class="card">JPA Dirty Checking에 대한 공부
-        <div class="interaction">
-          <input type="checkbox">
-          <div class="delete-btn">X</div>
-        </div>
-      </div>
-      <div class="card">JPA Dirty Checking에 대한 공부
-        <div class="interaction">
-          <input type="checkbox">
-          <div class="delete-btn">X</div>
-        </div>
-      </div>
-      <div class="card">JPA Dirty Checking에 대한 공부
-        <div class="interaction">
-          <input type="checkbox">
-          <div class="delete-btn">X</div>
-        </div>
-      </div>
+
     </section>
     <section id="page-section">
-      <div class="page">&lt;&lt;</div>
-      <div class="page">&lt;</div>
-      <div class="page">1</div>
-      <div class="page">2</div>
-      <div class="page">3</div>
-      <div class="page">4</div>
-      <div class="page">5</div>
-      <div class="page">&gt;</div>
-      <div class="page">&gt;&gt;</div>
+      <div class="page" th:each="page : ${pages}">
+        <a th:href="@{/page/list.do(pageIdx=${page.pageIdx}, filter=${filter.filter})}" th:text="${page.getDisplayValue()}"></a>
+      </div>
     </section>
   </main>
 </body>
+<script>
+
+  const changeFilter = (filter) => {
+    window.location.href = `/page/list.do?filter=${filter}`;
+  }
+
+  const deleteTodo = (element) => {
+    const todoId = element.parentNode.parentNode.getAttribute('data-todoId');
+    fetch(`/rest/v1/${todoId}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'checked': checked
+      })
+    }).then(() => {
+      window.location.reload();
+    }).catch(() => {
+      alert("서버에 문제가 발생하였습니다.");
+    });
+  }
+
+  const updateTodoChecked = (element) => {
+    const todoId = element.parentNode.parentNode.getAttribute('data-todoId');
+    const checked = element.checked;
+    fetch(`/rest/v1/checked/${todoId}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'checked': checked
+      })
+    }).then(() => {
+      window.location.reload();
+    }).catch(() => {
+      alert("서버에 문제가 발생하였습니다.");
+    });
+  }
+
+</script>
 </html>

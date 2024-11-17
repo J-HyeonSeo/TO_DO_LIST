@@ -8,7 +8,9 @@
 </head>
 <body>
   <header>
-    <h1>TO DO LIST</h1>
+    <a href="/page/list.do">
+      <h1>TO DO LIST</h1>
+    </a>
   </header>
   <main>
     <input id="todo-input" placeholder="이루어야 할 목표를 입력해주세요...">
@@ -21,7 +23,35 @@
 </body>
 <script>
 
-  const
+  const inputElement = document.getElementById("todo-input");
+  const buttonElement = document.getElementById("new-btn");
+
+  buttonElement.addEventListener("click", () => {
+
+    const content = inputElement.value;
+
+    if (content.length < 4) {
+      alert("적어도 4글자는 입력해주세요.");
+      return;
+    }
+
+    fetch("/rest/v1", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          'content': content
+      })
+    }).then(response => {
+      if (response.status == 200) {
+        window.location.href = "/page/list.do";
+      }
+    }).catch(error => {
+      alert("서버에 문제가 발생하였습니다.");
+    });
+
+  });
 
 </script>
 </html>
