@@ -1,5 +1,6 @@
 package com.jhs.todolist.entity;
 
+import com.jhs.todolist.dto.TodoDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,5 +30,13 @@ public class TodoEntity {
 
     @Column(name = "checked")
     private boolean checked;
+
+    public static TodoDto toDto(TodoEntity todoEntity) {
+        return TodoDto.builder()
+            .id(todoEntity.getId())
+            .content(todoEntity.getContent())
+            .checked(todoEntity.isChecked())
+            .build();
+    }
 
 }
